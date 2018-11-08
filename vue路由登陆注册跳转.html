@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='lib/vue.min.js'></script>
+    <!-- 1 引入路由 -->
+    <script src='lib/vue-router.js'></script>
+    <title>Document</title>
+    <div id="app">
+        <!-- <a href="#/login">登陆</a>
+        <a href="#/register">注册</a> -->
+        <!--2 相当于给路由得占位符 -->
+        <router-link to='/login'>登陆</router-link>
+        <router-link to='/register'>注册</router-link>
+        <router-view>
+        </router-view>
+    </div>
+    <!--3 定义要跳转得组建 -->
+    <template id='login'>
+        <h1> 登陆</h1> 
+    </template>
+    <template id='register'>
+        <h1> 注册</h1> 
+    </template>
+</head>
+<body>
+    <script>
+        var login={
+            template:'#login'
+        }
+        var register={
+            template:'#register'
+        }
+        //4 配置路由
+        var routerObj=new VueRouter({
+            routes:[
+                    //把根路径设置为login,redirect重定向
+                    { path: '/', redirect: '/login' }, 
+                    {path:'/login',component:login},
+                    {path:'/register',component:register}
+                ]
+        });
+        var vue=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+
+            },
+            //5 在vue中应用路由
+            router:routerObj
+        })
+    </script>
+</body>
+</html>
