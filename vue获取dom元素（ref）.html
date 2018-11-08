@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='lib/vue.min.js'></script>
+</head>
+<body>
+    <div id='app'>
+        <input type="button" value='获取DOM内容' @click='get'>
+        <!-- 通过ref绑定该元素 -->
+        <h3 ref='h3'>啊啊啊</h3>
+        <!-- 通过ref绑定该组建 -->
+        <aaa ref='mytemp'></aaa>
+        
+    </div>
+    <template id="temp">
+        <div>
+            <h1>我是组建</h1>
+        </div>
+    </template>
+    <script>
+        var tem={
+            template:'#temp',
+            data(){
+                return {
+                    msg:'组建里得内容'
+                }
+            },
+            methods:{
+                sayHi(){
+                    console.log('hello');
+                }
+            }
+        }
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+                get(){
+                    console.log(vm);
+                    //通过ref获取该元素 
+                    console.log(this.$refs.h3.innerText);
+                    console.log(this.$refs.mytemp.msg);
+                }
+            },
+            components:{
+                aaa:tem
+            }
+
+        })
+    </script>
+</body>
+</html>
