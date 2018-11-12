@@ -10,31 +10,40 @@
 </head>
 <body>
     <div id="app">
-        <!-- 跳转时地址添加参数 -->
-       <router-link to='/login/11/lyw'>登陆</router-link>
-       <router-link to='/register?id=10'>注册</router-link>
+       <router-link to='/info'>info</router-link>
        <router-view></router-view>
     </div>
     <template id='login'>
-        <!-- 组件中显示地址栏得参数 -->
-        <h1>登陆---{{$route.params.id}}---{{$route.params.name}}</h1>
+        <h1>登陆</h1>
     </template>
     <template id='register'>
-        <h1>注册---{{$route.query.id}}</h1>
+        <h1>注册</h1>
+    </template>
+    <template id='info'>
+        <div>
+            <h1>信息</h1>
+            <router-link to='/info/login'>登陆</router-link>
+            <router-link to='/info/register'>注册</router-link>
+            <router-view></router-view>
+        </div>
     </template>
     <script>
+        var info={
+            template:'#info'
+        }
         var login={
             template:'#login'
         }
         var register={
             template:'#register'
         }
-        // 两种方式 第一种 1：在router路由定义path中加:参数名 2.在router-link得to中地址后加/参数值 3.$route.params获取
-        //         第二种  1.在router-link to中地址后加问好加参数及值 2.$route.query获取
         var router=new VueRouter({
             routes:[
-                {path:'/login/:id/:name',component:login},
-                {path:'/register',component:register}
+                {
+                    path:'/info',
+                    component:info,
+                    children:[{path:'login',component:login},{path:'register',component:register}]
+                },
             ]
         })
     </script>
@@ -46,8 +55,6 @@
            
         },
         created(){
-            // 通过this.$route.query即可获取地址栏参数 
-            console.log(this.$route.query.id);
         },
         router
     })
