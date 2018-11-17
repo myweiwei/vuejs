@@ -68,7 +68,19 @@
 
             },
             //5 在vue中应用路由
-            router:routerObj
+            router:routerObj,
+            //watch监听路由变化
+            watch:{
+                '$route.path':function(newVal,oldVal){
+                    console.log(newVal+'-----'+oldVal);
+                    if(newVal=='/login'){
+                        console.log("欢迎进入登陆界面");
+                    }
+                    else if(newVal=='/register'){
+                        console.log("欢迎进入注册界面");
+                    }
+                }
+            }
         })
     </script>
 </body>

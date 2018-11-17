@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+       <input type="text" name="" id="" v-model='first'>
+       <input type="text" name="" id="" v-model='last'>
+       <input type="text" name="" id="" v-model='result'>
+    </div>
+</body>
+<script>
+    var vue=new Vue({
+        el:"#app",
+        data:{
+            first:'',
+            last:'',
+            result:''
+        },
+        methods:{
+            
+        },
+        //computed需注意
+        //1.引用时不要加括号，直接当作普通属性
+        //2.function中用到的任何值发生变化，都会重新计算
+        //3.会把计算的结果缓存起来，如果数据没有发生变化，不会重新计算
+        // computed:{
+        //     'result':function(){
+        //         return this.first+this.last
+        //     }
+        // },
+        watch:{
+            //first发生改变时调用该方法
+            'first':function(){
+               this.result=this.first+this.last;
+            },
+            //last发生改变时调用该方法
+            'last':function(){
+               this.result=this.first+this.last;
+            }
+        }
+    })
+</script>
+</html>
